@@ -1,0 +1,20 @@
+<h1>Feed</h1>
+<%= form_for(@feed) do |f| %>
+
+  <div class="field">
+  	<%= f.label :name %>
+  	<%= f.text_field :name %>
+  </div>
+  <div class="field">
+  	<%= f.label :url %>
+  	<%= f.text_field :url %>
+  </div>
+  
+  <div class="field">
+  	<%= f.label :parent_id %>
+  	<%= select_tag("feed[parent_id]", options_for_select(@feed_id_array)) %>
+  </div>
+  <div class="action">
+  	<%= f.submit "Create"%>
+  </div>
+<% end %>

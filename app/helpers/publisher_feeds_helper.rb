@@ -1,0 +1,2 @@
+module PublisherFeedsHelper
+end

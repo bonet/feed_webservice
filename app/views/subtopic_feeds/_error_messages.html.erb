@@ -1,0 +1,13 @@
+<% if @subtopic_feed.errors.any? %>
+  <div id="error_explanation">
+  	<h2><%= pluralize(@subtopic_feed.errors.count, "error") %>
+  		prohibited this feed from being saved
+  	</h2>
+  	<p>There were problems with the following fields:</p>
+  	  <ul>
+  	    <% @subtopic_feed.errors.full_messages.each do |msg| %>
+  	      <li><%= msg %></li>
+  	    <% end %>
+  	  </ul>
+ </div>
+<% end %>

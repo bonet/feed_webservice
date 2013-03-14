@@ -1,0 +1,25 @@
+<h1>SubTopic Feed</h1>
+<%= form_for(@subtopic_feed) do |f| %>
+  <%= render 'error_messages'%>
+  <div class="field">
+  	<%= f.label :name %>
+  	<%= f.text_field :name %>
+  </div>
+  <div class="field">
+  	<%= f.label :description %>
+  	<%= f.text_field :description %>
+  </div>
+  <div class="field">
+  	<%= f.label :url %>
+  	<%= f.text_field :url %>
+  </div>
+  
+  <div class="field">
+  	<%= f.label :parent_id %>
+  	<%= select_tag("subtopic_feed[parent_id]", options_for_select(@topic_feed_id_array)) %>
+  </div>
+  <div class="action">
+  	<%= f.submit "Create"%>
+  </div>
+  <p>Back to <%= link_to "Feeds Page", :controller => "feeds", :action => "index" %></p>
+<% end %>

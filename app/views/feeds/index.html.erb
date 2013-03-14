@@ -1,0 +1,16 @@
+<p>Add Publisher Feed <%= link_to "here", :controller => "publisher_feeds", :action => "new" %></p>
+<p>Add Topic Feed <%= link_to "here", :controller => "topic_feeds", :action => "new" %></p>
+<p>Add Subtopic Feed <%= link_to "here", :controller => "subtopic_feeds", :action => "new" %></p>
+<br /><hr />
+<p>
+
+	<% PublisherFeed.all.each do |p| %>
+	<h3><%= p.name%></h3>
+	    <% p.topic_feeds.each do |t| %>
+	      <p style="padding: 0 0 0 10px;"><b><%= t.name %> (<%= link_to t.url, t.url %>)</b></p>
+	        <% t.subtopic_feeds.each do |s| %>
+	          <p style="padding: 0 0 0 30px;"><%= s.name %> (<%= link_to s.url, s.url %>)</p>
+	        <%end%>
+	    <% end%>
+    <% end %>
+</p>

@@ -1,9 +1,14 @@
 FeedWebservice::Application.routes.draw do
   
-  resources :feeds
+  match '/feeds/', :to => 'feeds#index'
+  match '/feeds/getlist', :to => 'feeds#getlist'
+  match '/feeds/create_combination', :to => 'feeds#create_combination'
+  
   resources :publisher_feeds
   resources :topic_feeds
   resources :subtopic_feeds
+  
+  
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

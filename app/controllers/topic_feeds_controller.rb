@@ -2,6 +2,7 @@ class TopicFeedsController < ApplicationController
   def new
     @topic_feed = TopicFeed.new
     
+    #for html>select options
     @publisher_feed_id_array = [["", nil]]
 
     PublisherFeed.all.each do |f|

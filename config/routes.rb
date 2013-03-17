@@ -1,8 +1,9 @@
 FeedWebservice::Application.routes.draw do
   
   match '/feeds/', :to => 'feeds#index'
-  match '/feeds/getlist', :to => 'feeds#getlist'
-  match '/feeds/create_combination', :to => 'feeds#create_combination'
+  match '/feeds/get_feedlist', :to => 'feeds#get_feedlist'
+  match '/feeds/get_feedcollection/:id', :to => 'feeds#get_feedcollection'
+  match '/feeds/create_feedcollection', :to => 'feeds#create_feedcollection'
   
   resources :publisher_feeds
   resources :topic_feeds

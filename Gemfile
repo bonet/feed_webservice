@@ -5,10 +5,14 @@ gem 'rails', '3.2.12'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'sqlite3'
 gem 'rake', '0.8.7'
-gem "mongoid", "~> 3.0.0"
+gem "mongoid", "~> 3.1.0"
+gem "bson_ext", "~> 1.8.3"
 gem "cocaine", "~> 0.5.1"
+gem 'nokogiri' 
+gem 'jquery-rails'
+gem 'aws-sdk'
+gem 'rb-readline' # for rails console
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -22,7 +26,17 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :development, :test do
+  #gem 'rspec-rails', '2.0.1'
+  #gem 'autotest', '4.3.2'
+  #gem 'autotest-rails-pure', '4.1.0'
+  #gem 'rb-fchange' #for detecting filechange (Windows only)
+  #gem 'autotest-growl', '0.2.4'
+  
+  #gem 'rspec', '2.0.1'
+  #gem 'webrat', '0.7.1'
+end
+
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'

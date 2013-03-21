@@ -1,3 +1,9 @@
+#
+# Author Class
+# Author: Bonet Sugiarto
+# Date: 3/14/2013
+#
+
 class Counter
   include Mongoid::Document
   

@@ -1,3 +1,9 @@
+#
+# Publisher Class
+# Author: Bonet Sugiarto
+# Date: 3/21/2013
+#
+
 class Publisher
   
   include Mongoid::Document

@@ -1,3 +1,8 @@
+#
+# PubCatAggregatesController
+# Author: Bonet Sugiarto
+#
+
 class PubCatAggregatesController < ApplicationController
   
   DEFAULT_PUB_CAT_AGGREGATE_ID = 71

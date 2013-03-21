@@ -1,3 +1,8 @@
+#
+# CategoriesController
+# Author: Bonet Sugiarto
+#
+
 class CategoriesController < ApplicationController
   
   def new

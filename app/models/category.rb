@@ -1,3 +1,9 @@
+#
+# Category Class
+# Author: Bonet Sugiarto
+# Date: 3/21/2013
+#
+
 class Category
   
   include Mongoid::Document

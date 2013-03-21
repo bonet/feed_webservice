@@ -1,3 +1,9 @@
+#
+# PubCat Class
+# Author: Bonet Sugiarto
+# Date: 3/21/2013
+#
+
 class PubCat
   
   include Mongoid::Document

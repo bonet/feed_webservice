@@ -1,3 +1,8 @@
+#
+# PublishersController
+# Author: Bonet Sugiarto
+#
+
 class PublishersController < ApplicationController
   
   def new

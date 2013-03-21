@@ -1,3 +1,8 @@
+#
+# PubCatsController
+# Author: Bonet Sugiarto
+#
+
 class PubCatsController < ApplicationController
   
   def new

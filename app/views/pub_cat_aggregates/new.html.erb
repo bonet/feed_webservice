@@ -1,0 +1,15 @@
+<h1>Publisher - Category Aggregates</h1>
+<%= form_for(@pub_cat_aggregate) do |pc| %>
+
+
+  <% @pub_cat_array.each do |pub_cat|%>
+    <li> <%= pub_cat.keys[0] + " - " + pub_cat.values[0] %> </li>
+  <% end%>
+
+  
+  <div class="action">
+  	<%= pc.submit "Create"%>
+  </div>
+  <p>Back to <%= link_to "Admin Page", :controller => "admin", :action => "index" %></p>
+
+<% end %>

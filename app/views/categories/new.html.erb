@@ -1,0 +1,13 @@
+<h1>Category</h1>
+<%= form_for(@category) do |f| %>
+
+  <div class="field">
+  	<%= f.label :name %>
+  	<%= f.text_field :name %>
+  </div>
+  
+  <div class="action">
+  	<%= f.submit "Create"%>
+  </div>
+  <p>Back to <%= link_to "Admin Page", :controller => "admin", :action => "index" %></p>
+<% end %>

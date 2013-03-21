@@ -1,15 +1,23 @@
 FeedWebservice::Application.routes.draw do
   
-  match '/feeds/', :to => 'feeds#index'
-  match '/feeds/get_feedlist', :to => 'feeds#get_feedlist'
-  match '/feeds/get_feedcollection/:id', :to => 'feeds#get_feedcollection'
-  match '/feeds/create_feedcollection', :to => 'feeds#create_feedcollection'
+  match '/admin/', :to => 'admin#index'
+  match '/admin/publisher', :to => 'publishers#new'
+  match '/admin/category', :to => 'categories#new'
+  match '/admin/pub_cat', :to => 'pub_cats#new'
   
-  resources :publisher_feeds
-  resources :topic_feeds
-  resources :subtopic_feeds
+  match '/get_pub_cat_namelist', :to => 'pub_cats#get_pub_cat_namelist'
+  match '/get_personalized_pub_cat_aggregate/:id', :to => 'pub_cat_aggregates#show'
+  match '/get_default_pub_cat_aggregate', :to => 'pub_cat_aggregates#show_default'
+  match '/register_pub_cats', :to => 'pub_cat_aggregates#new'
   
+  match '/cron/update_pub_cat_namelist', :to => 'pub_cats#update_pub_cat_namelist'
+  match '/cron/pub_cat_aggregates/update', :to => 'pub_cat_aggregates#cron_update'
+
   
+  resources :publishers
+  resources :categories
+  resources :pub_cats
+  resources :pub_cat_aggregates
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

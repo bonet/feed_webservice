@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby "1.9.3" # Ruby version, heroku needs this or else it's using 1.9.2
+
 gem 'rails', '3.2.12'
 
 # Bundle edge Rails instead:

@@ -5,7 +5,7 @@
 
 class PubCatAggregatesController < ApplicationController
   
-  DEFAULT_PUB_CAT_AGGREGATE_ID = "71"
+  DEFAULT_PUB_CAT_AGGREGATE_ID = 71
   
   def new
     
@@ -29,7 +29,7 @@ class PubCatAggregatesController < ApplicationController
   end
   
   def show_default
-    pca = PubCatAggregate.find("73")
+    pca = PubCatAggregate.find(DEFAULT_PUB_CAT_AGGREGATE_ID)
     
     render :text => pca.to_json
   end

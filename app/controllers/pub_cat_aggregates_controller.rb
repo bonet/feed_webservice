@@ -5,7 +5,7 @@
 
 class PubCatAggregatesController < ApplicationController
   
-  DEFAULT_PUB_CAT_AGGREGATE_ID = 71
+  DEFAULT_PUB_CAT_AGGREGATE_ID = "71"
   
   def new
     

@@ -15,6 +15,7 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem 'aws-sdk'
 gem 'rb-readline' # for rails console
+gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.

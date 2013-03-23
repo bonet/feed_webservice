@@ -14,7 +14,7 @@ class PubCat
   
   #require 'active_support/core_ext/hash/deep_merge'
   
-  MAX_CONTENT_URLS_PER_FEED_URL = 2
+  MAX_CONTENT_URLS_PER_PUB_CAT = 20
   
   belongs_to :publisher
   belongs_to :category
@@ -47,14 +47,19 @@ class PubCat
       
       self.content_urls = {}
       
+      num_feed_urls = self.feed_urls.count
+      max_content_urls_per_feed_url = (MAX_CONTENT_URLS_PER_PUB_CAT / num_feed_urls).ceil
+      
       self.feed_urls.each do |feed_url|
         
         feed_url.strip!
         
+        # Grab the Feed URL 
         response = Nokogiri::XML open(feed_url)
         
         c = 0;
         
+        # Parse each content_url item
         response.xpath("//item").each do |s|
           content_url_hash = {}
           
@@ -70,10 +75,12 @@ class PubCat
           # it's possible that there is more than 1 item published on the same pub_date, so save each into an array
           self.content_urls[pub_date].push content_url_hash 
           
-          break if (c = c+1 ) >= MAX_CONTENT_URLS_PER_FEED_URL
+          break if (c = c+1 ) >= max_content_urls_per_feed_url
           
         end
       end
+      
+      self.content_urls.keys.sort! unless self.content_urls.nil?
     end
     
     def update_pub_cat_list

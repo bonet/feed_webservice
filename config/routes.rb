@@ -11,7 +11,7 @@ FeedWebservice::Application.routes.draw do
   match '/register_pub_cats', :to => 'pub_cat_aggregates#new'
   
   match '/cron/update_pub_cat_namelist', :to => 'pub_cats#update_pub_cat_namelist'
-  match '/cron/pub_cat_aggregates/update', :to => 'pub_cat_aggregates#cron_update'
+  match '/cron/update_pub_cat_aggregates', :to => 'pub_cat_aggregates#cron_update'
 
   
   resources :publishers

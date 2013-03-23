@@ -44,6 +44,7 @@ class PubCatAggregatesController < ApplicationController
     # Update Filter By Publisher Items
     
     PubCat.all.each do |pubcat|
+      #logger.debug "\n\n ====>>>> " + pubcat.inspect.to_s
       pubcat.save #Saving will automatically update the content_urls (before_save) 
     end
     

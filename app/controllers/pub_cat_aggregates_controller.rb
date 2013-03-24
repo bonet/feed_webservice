@@ -34,17 +34,14 @@ class PubCatAggregatesController < ApplicationController
     render :text => pca.to_json
   end
   
-  def cron_update
+  def cron_update_pub_cat_aggregates
     
     # Password check
     if params[:cron_pass] != ENV['CRON_PASS']
       return render :nothing => true
     end
     
-    # Update Filter By Publisher Items
-    
     PubCat.all.each do |pubcat|
-      #logger.debug "\n\n ====>>>> " + pubcat.inspect.to_s
       pubcat.save #Saving will automatically update the content_urls (before_save) 
     end
     
@@ -53,8 +50,7 @@ class PubCatAggregatesController < ApplicationController
     end
 
     render :nothing => true
-    #render :text => PubCatAggregate.all.inspect
-    #redirect_to :controller => 'admin', :action => 'index'
+    
   end
   
   def create
@@ -62,6 +58,7 @@ class PubCatAggregatesController < ApplicationController
   end
   
   def sort_numeric_csv_string(str) 
+    
     #Sort ascending the numbers in pub_cat_ids string
     
     sorted_pub_cat_id_array = []
@@ -71,5 +68,6 @@ class PubCatAggregatesController < ApplicationController
     end
     
     sorted_pub_cat_id_string = sorted_pub_cat_id_array.sort!.join(",")  
+    
   end
 end

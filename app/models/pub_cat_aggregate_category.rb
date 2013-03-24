@@ -1,5 +1,9 @@
 #
 # PubCatAggregateCategory Class
+#
+# Description:
+# PubCatAggregateCategory is an aggregate of PubCats grouped by category.  This is to falicitate filtering URL Contents by Category.
+#
 # Author: Bonet Sugiarto
 # Date: 3/21/2013
 #

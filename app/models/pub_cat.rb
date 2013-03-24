@@ -1,8 +1,14 @@
 #
 # PubCat Class
+#
+# Description:
+# PubCat is a mixture of Publisher and Category.  One PubCat consists of all relevant XML Feed URLs for one specific Publisher-Category combination.
+# For Example, Publisher: NYT + Category: Arts = 1 PubCat. It has one or more Feed URLs and zero or more Content URLs from NYT related to Arts.
+# 
 # Author: Bonet Sugiarto
 # Date: 3/21/2013
 #
+
 
 class PubCat
   
@@ -11,8 +17,6 @@ class PubCat
   
   require 'open-uri'
   require 'nokogiri'
-  
-  #require 'active_support/core_ext/hash/deep_merge'
   
   MAX_CONTENT_URLS_PER_PUB_CAT = 20
   
@@ -27,7 +31,6 @@ class PubCat
   
   has_and_belongs_to_many :pub_cat_aggregates
   
-  #index({ publisher_id: 1, category_id: 1 }, { unique: true, :name => "idx_publisher_id_category_id"})
   index({ publisher_id: 1 }, { :name => "idx_publisher_id"})
   index({ category_id: 1 }, { :name => "idx_category_id"})
   

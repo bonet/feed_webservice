@@ -1,5 +1,11 @@
 #
 # PubCatAggregate Class
+#
+# Description: 
+# PubCatAggregate is a collection of PubCatAggregatePublishers and PubCatAggregateCategories.
+# This is to facilitate filtering by Publisher or Category. In PubCatAggregatePublishers, all PubCats are grouped by publisher.
+# The same thing also applies for PubCatAggregateCategories.
+# 
 # Author: Bonet Sugiarto
 # Date: 3/21/2013
 #
@@ -22,8 +28,6 @@ class PubCatAggregate
   has_and_belongs_to_many :pub_cat_aggregate_publishers
   has_and_belongs_to_many :pub_cat_aggregate_categories
   
-  #attr_accessible :pub_cat_ids_string
-  
   validates :pub_cat_ids_string, :presence => true
   
   before_save :populate_id, :populate_pub_cat_aggregate_publishers_and_pub_cat_aggregate_categories
@@ -31,7 +35,7 @@ class PubCatAggregate
   
   public
     
-    # this function grabs pub_cats (and their content_urls) and then aggregate + group the pub_cats either by publisher 
+    # this function grabs PubCats (and their content_urls) and then aggregate + group them either by publisher 
     # (for 'Filter By Publisher' contents) or by category (for 'Filter By Category' contents)
     
     def populate_pub_cat_aggregate_publishers_and_pub_cat_aggregate_categories
@@ -39,14 +43,14 @@ class PubCatAggregate
       pub_cat_id_array = self.pub_cat_ids_string.split(",").sort!
       pcid_string = pub_cat_id_array.join(",")
       
-      # populate PubCatAggregatePublishers (get all pub_cats grouped by publisher, i.e. for 'Filter By Publisher')
+      # For 'Filter By Publisher', we are iterating all existing Publisher documents, and then checking whether there is a PubCat document
+      # related to each of the Publisher document. If there is, add the PubCat's URLs into the PubCatAggregatePublisher doc
       Publisher.all.each do |p|  
         
         pub_cats = PubCat.where(:_id.in => pub_cat_id_array).and(:publisher_id => p._id)
         
         next if pub_cats.count < 1 # skip loop iteration if pub_cat for this p._id doesn't exist
         
-        # find PubCatAggregatePublisher (i.e. all pub_cats that is related to this publisher ID: p._id)
         pca_publisher = PubCatAggregatePublisher.where(:pub_cat_ids_string => pcid_string).and(:publisher_id => p._id).first
         
         # It's possible that the PubCatAggregatePublisher item should exist, but has not been created yet; so we create a new one here.  
@@ -58,7 +62,9 @@ class PubCatAggregate
         end
         
         
-        # rationing of max URLs per pub_cat to be included into the PubCatAggregatePublisher object
+        # Since PubCatAggregatePublisher object has a max limit of URLs: MAX_CONTENT_URLS_PER_PUBLISHER, we need to calculate
+        # how many content URLs per PubCat we can include, because we want to spread the number of content URLs evenly
+        # for each PubCat
         max_content_urls_per_pub_cat = ( MAX_CONTENT_URLS_PER_PUBLISHER / pub_cats.count ).ceil
         
         pca_publisher.content_urls = {}
@@ -68,7 +74,7 @@ class PubCatAggregate
           c_url_hash = {}
           k = 0
           pc.content_urls.each do |key, val|
-            #logger.debug " ||||||||||||| VAL IS " + val.inspect.to_s
+            
             c_url_hash[key] = val
             
             k = k + 1
@@ -88,14 +94,14 @@ class PubCatAggregate
       end
       
 
-      # populate PubCatAggregateCategories (get all pub_cats grouped by category, i.e. for 'Filter By Category')
+      # For 'Filter By Publisher', we are iterating all existing Publisher documents, and then checking whether there is a PubCat document
+      # related to each of the Publisher document. If there is, add the PubCat's URLs into the PubCatAggregatePublisher doc
       Category.all.each do |c|
         
         pub_cats = PubCat.where(:_id.in => pub_cat_id_array).and(:category_id => c._id)
         
         next if pub_cats.count < 1 # skip loop iteration if pub_cat for this c._id doesn't exist
         
-        # find PubCatAggregateCategory (i.e. all pub_cats that is related to this category ID: c._id)
         pca_category = PubCatAggregateCategory.where(:pub_cat_ids_string => pcid_string).and(:category_id => c._id).first
         
         # It's possible that the PubCatAggregateCategory item should exist, but has not been created yet; so we create a new one here.  
@@ -106,7 +112,9 @@ class PubCatAggregate
                                                     )
         end
         
-        # rationing of max urls per pub_cat to be included into the PubCatAggregateCategory object
+        # Since PubCatAggregateCategory object has a max limit of URLs: MAX_CONTENT_URLS_PER_PUBLISHER, we need to calculate
+        # how many content URLs per PubCat we can include, because we want to spread the number of content URLs evenly
+        # for each PubCat
         max_content_urls_per_pub_cat = ( MAX_CONTENT_URLS_PER_CATEGORY / pub_cats.count ).ceil
         
         pca_category.content_urls = {}

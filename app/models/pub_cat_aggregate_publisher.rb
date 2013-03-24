@@ -1,5 +1,9 @@
 #
 # PubCatAggregatePublisher Class
+#
+# Description:
+# PubCatAggregatePublisher is an aggregate of PubCats grouped by publisher.  This is to falicitate filtering URL Contents by Publisher.
+#
 # Author: Bonet Sugiarto
 # Date: 3/21/2013
 #

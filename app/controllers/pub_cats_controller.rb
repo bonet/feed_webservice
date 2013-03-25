@@ -55,15 +55,18 @@ class PubCatsController < ApplicationController
     
     n = {}
     
+    PubCatNamelist.delete_all
+
     Publisher.all.each do |pub|
       PubCat.where(:publisher_id => pub._id).each do |pubcat|
         n[pub._id]  = {:publisher_id => pub._id, :publisher_name => pub.name, :categories => []} if n[pub._id] .nil?
-        n[pub._id][:categories] << {:category_id => pubcat.category_id, :category_name => Category.find(pubcat.category_id).name}
+        n[pub._id][:categories] << {:pub_cat_id => pubcat._id, :category_id => pubcat.category_id, :category_name => Category.find(pubcat.category_id).name}
       end
       
     end
-    
+
     PubCatNamelist.create(:namelist => n)
+
     render :nothing => true
   end
   

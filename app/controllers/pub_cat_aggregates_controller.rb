@@ -11,7 +11,7 @@ class PubCatAggregatesController < ApplicationController
     
     sorted_pub_cat_id_string = self.sort_numeric_csv_string(params[:pub_cat_ids]) 
 
-    pca = PubCatAggregate.where(:pub_cat_ids_string => sorted_pub_cat_id_string)
+    pca = PubCatAggregate.where(:pub_cat_ids_string => sorted_pub_cat_id_string).first
       
     unless pca.present?
       pca = PubCatAggregate.new(:pub_cat_ids_string => sorted_pub_cat_id_string)

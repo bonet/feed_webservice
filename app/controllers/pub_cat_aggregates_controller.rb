@@ -34,25 +34,6 @@ class PubCatAggregatesController < ApplicationController
     render :text => pca.to_json
   end
   
-  def cron_update_pub_cat_aggregates
-    
-    # Password check
-    if params[:cron_pass] != ENV['CRON_PASS']
-      return render :nothing => true
-    end
-    
-    PubCat.all.each do |pubcat|
-      pubcat.save #Saving will automatically update the content_urls (before_save) 
-    end
-    
-    PubCatAggregate.all.each do |pca|
-      pca.save #Saving will automatically update PubCatAggregatePublisher and PubCatAggregateCategory
-    end
-
-    render :nothing => true
-    
-  end
-  
   def create
     
   end

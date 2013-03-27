@@ -14,4 +14,24 @@ class PubCatNamelist
   include Mongoid::Document
   
   field :namelist
+  
+  
+  # This is to update available PubCats, i.e. admin might have added one or more PubCats; running this update will sync PubCatNamelist with all existing PubCats
+  def self.cron_update_pub_cat_namelist
+
+    n = {}
+    
+    self.delete_all
+
+    Publisher.all.each do |pub|
+      PubCat.where(:publisher_id => pub._id).each do |pubcat|
+        n[pub._id]  = {:publisher_id => pub._id, :publisher_name => pub.name, :categories => []} if n[pub._id] .nil?
+        n[pub._id][:categories] << {:pub_cat_id => pubcat._id, :category_id => pubcat.category_id, :category_name => Category.find(pubcat.category_id).name}
+      end
+      
+    end
+
+    self.create(:namelist => n)
+
+  end
 end

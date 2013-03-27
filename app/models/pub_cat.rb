@@ -28,6 +28,7 @@ class PubCat
   field :category_id, type: Integer
   field :feed_urls, type: Array
   field :content_urls, type: Hash
+  field :updated, type: DateTime
   
   has_and_belongs_to_many :pub_cat_aggregates
   
@@ -35,8 +36,7 @@ class PubCat
   index({ category_id: 1 }, { :name => "idx_category_id"})
   
   before_save :populate_id, :split_feed_urls, :populate_content_urls
-  
-  after_save :update_pub_cat_list
+
   
   private
   
@@ -84,9 +84,8 @@ class PubCat
       end
       
       self.content_urls.keys.sort! unless self.content_urls.nil?
+      
+      self.updated = DateTime.now
     end
     
-    def update_pub_cat_list
-      
-    end
 end

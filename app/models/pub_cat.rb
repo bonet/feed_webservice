@@ -68,7 +68,7 @@ class PubCat
           
           content_url_hash['title'] = s.at_xpath("title").child().to_s
           content_url_hash['link'] = s.at_xpath("link").child().to_s
-          pub_date = Time.parse s.at_xpath("pubDate").child().to_s
+          pub_date = DateTime.parse s.at_xpath("pubDate").child().to_s
           
           unless self.content_urls[pub_date].present?
             self.content_urls[pub_date] = []
@@ -83,7 +83,7 @@ class PubCat
         end
       end
       
-      self.content_urls.keys.sort! unless self.content_urls.nil?
+      self.content_urls.sort_by { |date, urls| date }.reverse! unless self.content_urls.nil?
       
       self.updated = DateTime.now
     end

@@ -82,12 +82,13 @@ class PubCatAggregate
           end
           
           # deep-merge the URLs for this publisher ID: p._id
-          pca_publisher.content_urls.deep_merge!(c_url_hash).keys.sort! unless c_url_hash.nil?
+          pca_publisher.content_urls.deep_merge!(c_url_hash) unless c_url_hash.nil?
           
         end
         
         
         #if pca_publisher.content_urls.present?
+          pca_publisher.content_urls.sort_by { |date, urls| date }.reverse!
           pca_publisher.save
           self.pub_cat_aggregate_publishers << pca_publisher
         #end
@@ -132,12 +133,13 @@ class PubCatAggregate
           end
           
           # deep-merge the URLs for this category ID: c._id
-          pca_category.content_urls.deep_merge!(c_url_hash).keys.sort! unless c_url_hash.nil?
+          pca_category.content_urls.deep_merge!(c_url_hash) unless c_url_hash.nil?
           
         end
         
         
         #if pca_category.content_urls.present?
+          pca_category.content_urls.sort_by { |date, urls| date }.reverse!
           pca_category.save
           self.pub_cat_aggregate_categories << pca_category
         #end

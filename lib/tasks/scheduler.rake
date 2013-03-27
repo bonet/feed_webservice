@@ -5,7 +5,7 @@ task :update_pub_cat_namelist => :environment do
   puts "done."
 end
 
-task :update_pub_cat_namelist => :environment do
+task :update_pub_cat_aggregates => :environment do
   puts "Updating pub_cat_aggregates..."
   PubCatAggregate.cron_update_pub_cat_aggregates
   puts "done."

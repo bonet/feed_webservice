@@ -74,4 +74,34 @@ class PubCatsController < ApplicationController
     render :text => PubCatNamelist.first.namelist.to_json
   end
   
+  def get_personalized_pub_cat_namelist
+    
+    if params[:pub_cat_aggregate_id].nil?
+      render :nothing => true
+    else
+      pca = PubCatAggregate.find(params[:pub_cat_aggregate_id])
+      pc_ids_array = pca['pub_cat_ids_string'].split(",")
+       
+      
+      result = {}
+      PubCatNamelist.first.namelist.each do |k,v|
+        
+        v['categories'].each_with_index do |n,m|
+          
+          if pc_ids_array.include? n['pub_cat_id'].to_s
+            v['categories'][m.to_i]['owned'] = "true"
+          else
+            v['categories'][m.to_i]['owned'] = "false"
+          end
+          
+        end
+        
+        result[k] = v
+      end
+      
+      render :text => result.to_json
+    end
+    
+  end
+  
 end

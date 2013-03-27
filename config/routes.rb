@@ -5,6 +5,7 @@ FeedWebservice::Application.routes.draw do
   match '/admin/category', :to => 'categories#new'
   match '/admin/pub_cat', :to => 'pub_cats#new'
   
+  match '/get_personalized_pub_cat_namelist/:pub_cat_aggregate_id', :to => 'pub_cats#get_personalized_pub_cat_namelist'
   match '/get_pub_cat_namelist', :to => 'pub_cats#get_pub_cat_namelist'
   match '/get_personalized_pub_cat_aggregate/:id', :to => 'pub_cat_aggregates#show'
   match '/get_default_pub_cat_aggregate', :to => 'pub_cat_aggregates#show_default'

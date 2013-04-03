@@ -79,14 +79,14 @@ development:
     default:
       # Defines the name of the default database that Mongoid can connect to.
       # (required).
-      database: <%= ENV['MONGODB_DATABASE'] %>
+      database: <%= ENV['DEV_MONGODB_DATABASE'] %>
       # Provides the hosts the default session can connect to. Must be an array
       # of host:port pairs. (required)
       hosts:
-        - <%= ENV['MONGODB_HOST'] %>
+        - <%= ENV['DEV_MONGODB_HOST'] %>
         
-      username: <%= ENV['MONGODB_USERNAME'] %>
-      password: <%= ENV['MONGODB_PASSWORD'] %>
+      username: <%= ENV['DEV_MONGODB_USERNAME'] %>
+      password: <%= ENV['DEV_MONGODB_PASSWORD'] %>
       
       options:
         # Change whether the session persists in safe mode by default.

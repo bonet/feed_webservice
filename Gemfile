@@ -14,6 +14,7 @@ gem 'aws-sdk'
 gem 'rb-readline' # for rails console
 gem 'thin'
 gem 'pg'
+gem 'figaro'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -1,0 +1,15 @@
+development:
+  RAILS_ENV: 'development'
+  SECRET_TOKEN: ''
+
+test:
+  RAILS_ENV: 'test'
+  SECRET_TOKEN: ''
+  
+staging:
+  RAILS_ENV: 'staging'
+  SECRET_TOKEN: ''
+
+production:
+  RAILS_ENV: 'production'
+  SECRET_TOKEN: ''

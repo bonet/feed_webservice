@@ -41,6 +41,8 @@ group :development, :test do
   
   gem 'rspec-rails'
   
+  gem 'mongoid-rspec'
+  
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-spork'
@@ -54,7 +56,7 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'shoulda-matchers'
-  gem 'terminal-notifier-guard' # OSX 10.8
+  #gem 'terminal-notifier-guard' # OSX 10.8
   gem 'mailcatcher'
   gem 'zeus' 
 end

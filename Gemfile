@@ -11,10 +11,9 @@ gem "cocaine"
 gem 'nokogiri' 
 gem 'jquery-rails'
 gem 'aws-sdk'
-gem 'rb-readline' # for rails console
-gem 'thin'
+
 gem 'pg'
-gem 'figaro'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -23,21 +22,39 @@ group :assets do
 end
 
 group :development do
+  gem 'thin'
+  
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'rb-fsevent'
+  gem 'pry-rails'
   gem 'colorize'
+
+  gem 'rb-fchange', :require => false
+  gem 'rb-fsevent', '~> 0.9.2'
+  gem 'rb-inotify', :require => false
+  gem 'rb-readline', :require => false
 end
 
+
 group :development, :test do
+  gem 'figaro'
+  
+  gem 'rspec-rails'
+  
   gem 'guard-bundler'
   gem 'guard-rspec'
   gem 'guard-spork'
+  
   gem 'factory_girl_rails'
-  gem 'capybara'
-  gem 'rspec-rails'
-  gem 'shoulda-matchers'
+
   gem 'simplecov', :require => false
-  # gem 'selenium-webdriver'
-  # gem 'database_cleaner'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'shoulda-matchers'
+  gem 'terminal-notifier-guard' # OSX 10.8
+  gem 'mailcatcher'
+  gem 'zeus' 
 end

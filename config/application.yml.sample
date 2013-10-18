@@ -1,15 +1,30 @@
 development:
   RAILS_ENV: 'development'
   SECRET_TOKEN: ''
+  MONGOID_HOST: ''
+  MONGOID_USERNAME: ''
+  MONGOID_PASSWORD: ''
 
 test:
   RAILS_ENV: 'test'
   SECRET_TOKEN: ''
+  MONGOID_HOST: ''
+  MONGOID_USERNAME: ''
+  MONGOID_PASSWORD: ''
   
 staging:
   RAILS_ENV: 'staging'
   SECRET_TOKEN: ''
+  MONGOID_HOST: ''
+  MONGOID_USERNAME: ''
+  MONGOID_PASSWORD: ''
+  MONGOID_DATABASE: ''
 
 production:
   RAILS_ENV: 'production'
   SECRET_TOKEN: ''
+  MONGOID_HOST: ''
+  MONGOID_USERNAME: ''
+  MONGOID_PASSWORD: ''
+  MONGOID_DATABASE: ''
+  

@@ -5,7 +5,7 @@ ruby "2.0.0"
 gem 'rails', '3.2.12'
 
 gem 'rake'
-gem "mongoid"
+gem "mongoid", "~> 3.0.0"
 gem "bson_ext"
 gem "cocaine"
 gem 'nokogiri' 

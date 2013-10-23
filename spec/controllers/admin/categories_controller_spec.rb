@@ -19,6 +19,10 @@ describe Admin::CategoriesController do
     
     context "Category creation" do
       it { assigns(:category).should_not be nil }
+      
+      it "total Category item count should be 1" do
+        Category.count.should eq(1)
+      end
     end
   end
 

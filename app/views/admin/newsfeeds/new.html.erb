@@ -1,0 +1,24 @@
+<h1>Newfeed</h1>
+<%= form_for(@newsfeed, url: admin_newsfeeds_path) do |newsfeed| %>
+
+  <div class="field">
+    <%= newsfeed.label :publisher %>
+    <%= select_tag("newsfeed[publisher_id]", options_for_select(@publisher_array)) %>
+  </div>
+  
+  <div class="field">
+    <%= newsfeed.label :category %>
+    <%= select_tag("newsfeed[category_id]", options_for_select(@category_array)) %>
+  </div>
+  
+  <div class="field">
+    <%= newsfeed.label :feed_urls %>
+    <%= newsfeed.text_field :feed_urls %>
+  </div>
+  
+  <div class="action">
+    <%= newsfeed.submit "Create"%>
+  </div>
+  <p>Back to <%= link_to "Admin Page", admin_index_path %></p>
+
+<% end %>

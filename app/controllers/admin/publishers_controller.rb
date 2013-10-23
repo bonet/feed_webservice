@@ -5,9 +5,7 @@ class Admin::PublishersController < ApplicationController
   end
   
   def create
-    @publisher = Publisher.new(params[:publisher])
-    @publisher.save
-    
+    @publisher = Publisher.create(params[:publisher])
     redirect_to new_admin_publisher_path
   end
   

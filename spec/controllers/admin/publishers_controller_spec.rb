@@ -19,6 +19,10 @@ describe Admin::PublishersController do
     
     context "Publisher creation" do
       it { assigns(:publisher).should_not be nil }
+      
+      it "total Publisher item count should be 1" do
+        Publisher.count.should eq(1)
+      end
     end
   end
 

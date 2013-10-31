@@ -46,7 +46,7 @@ Spork.prefork do
       DatabaseCleaner.start
     end
     
-    config.after do
+    config.after :each do
       DatabaseCleaner.clean
     end
   end

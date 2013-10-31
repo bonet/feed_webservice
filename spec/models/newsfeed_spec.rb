@@ -21,7 +21,7 @@ describe Newsfeed do
   
   context "object creation" do
     
-    let(:nyt_tech_feed) { FactoryGirl.create(:nyt_tech_rss_newsfeed) }
+    let(:nyt_tech_feed) { FactoryGirl.create(:nyt_tech_newsfeed) }
     
     it "should have proper attributes" do
       nyt_tech_feed.should_not be_nil
@@ -34,7 +34,7 @@ describe Newsfeed do
       nyt_tech_feed
       
       lambda {
-        FactoryGirl.create(:nyt_arts_rss_newsfeed) 
+        FactoryGirl.create(:nyt_arts_newsfeed) 
       }.should change{ Newsfeed.max(:_id) }.by(1)
     end
   end

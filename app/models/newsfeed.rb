@@ -49,7 +49,7 @@ class Newsfeed
       # Grab the Feed URL 
       response = Nokogiri::XML open(feed_url)
       
-      c = 0;
+      c = 0
       
       # Parse each content_url item
       response.xpath("//item").each do |u|

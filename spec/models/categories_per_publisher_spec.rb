@@ -9,8 +9,8 @@ describe CategoriesPerPublisher do
   context "Cron test" do
     
     before do
-      FactoryGirl.create(:nyt_tech_rss_newsfeed)
-      FactoryGirl.create(:nyt_arts_rss_newsfeed)
+      FactoryGirl.create(:nyt_tech_newsfeed)
+      FactoryGirl.create(:nyt_arts_newsfeed)
       CategoriesPerPublisher.cron_update_categories_per_publisher
     end
     

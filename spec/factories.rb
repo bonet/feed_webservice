@@ -1,4 +1,4 @@
-def get_category_id(component)
+def get_category(component)
   category_list = { :category_art => "Art",
                     :category_science => "Science",
                     :category_business => "Business",
@@ -9,15 +9,13 @@ def get_category_id(component)
        
   cat = Category.where(name: category_list[component]).first
   if !cat.nil?
-    cat._id
+    cat
   else
-    FactoryGirl.create(component)._id 
+    FactoryGirl.create(component)
   end
-
-  
 end
 
-def get_publisher_id(component) 
+def get_publisher(component) 
   publisher_list = { :publisher_nyt => "New York Times",
                      :publisher_wash => "Washington Post",
                      :publisher_tc => "TechCrunch"
@@ -27,8 +25,8 @@ def get_publisher_id(component)
          
   pub = Publisher.where(name: publisher_list[component]).first
   if !pub.nil?
-    pub._id
+    pub
   else
-    FactoryGirl.create(component)._id 
+    FactoryGirl.create(component)
   end
 end

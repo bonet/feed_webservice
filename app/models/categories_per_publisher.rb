@@ -1,4 +1,4 @@
-# CategoriesPerPublisher list can be used for navigation menu
+# CategoriesPerPublisher list all existing categories grouped by publisher; it can be used for navigation menu
 
 class CategoriesPerPublisher
   

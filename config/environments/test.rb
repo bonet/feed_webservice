@@ -34,4 +34,6 @@ FeedWebservice::Application.configure do
 
   # Print deprecation notices to the stderr
   config.active_support.deprecation = :stderr
+  
+  config.max_content_urls_per_publisher_or_category = 20
 end

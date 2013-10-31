@@ -1,7 +1,8 @@
 class NewsfeedAggregatePerCategory
   
   include Mongoid::Document
-  include IdIncrementer # auto increment id
+  include IdIncrementer 
+  include NewsfeedAggregatePerComponent
   
   field :_id, type: Integer
   field :newsfeed_aggregate_ids, type: Array
@@ -12,6 +13,14 @@ class NewsfeedAggregatePerCategory
   
   has_and_belongs_to_many :newsfeed_aggregates
   
-  before_save :populate_id
+  before_save :populate_id, :populate_content_urls
   
+  def component_id_sym
+    :category_id
+  end
+  
+  def component_id
+    self.category_id
+  end
+
 end

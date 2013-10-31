@@ -34,4 +34,6 @@ FeedWebservice::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+  
+  config.max_content_urls_per_publisher_or_category = 20
 end

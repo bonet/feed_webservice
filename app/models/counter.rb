@@ -1,12 +1,5 @@
-#
-# Author Class
-# Author: Bonet Sugiarto
-#
-# Description:
+
 # MongoDB Document's Primary Key / ID in Integer format.
-#
-# Date: 3/14/2013
-#
 
 class Counter
   include Mongoid::Document

@@ -5,6 +5,8 @@ class NewsfeedAggregate
   
   field :_id, type: Integer
   field :newsfeed_ids_string
+  field :newsfeed_aggregate_per_publishers, type: Array
+  field :newsfeed_aggregate_per_categories, type: Array
   
   index({ newsfeed_ids_string: 1 }, { unique: true, name: "idx_newsfeed_ids_string" })
   
@@ -35,7 +37,6 @@ class NewsfeedAggregate
   private
   
   # this method grabs Newsfeeds and then aggregate them by Publisher and by Category
-  
   def populate_newsfeed_aggregate_per_publishers_and_newsfeed_aggregate_per_categories
     
     ["publisher", "category"].each do |item|
@@ -47,7 +48,7 @@ class NewsfeedAggregate
       # Check whether there is a Newsfeed document related to each of the Category / Publisher document.
       # If there is, add the Newsfeed's URLs into the NewsfeedAggregatePerCategory / NewsfeedAggregatePerPublisher doc
       
-      Object.const_get(item.capitalize).all.each do |component|  # for each Category.all or Publisher.all
+      Object.const_get(item.capitalize).all.each do |component|
         
         component_id = (item + "_id").to_sym                 # :category_id or :publisher_id
         component_name = (item + "_name").to_sym             # :category_name or :publisher_name
@@ -56,7 +57,7 @@ class NewsfeedAggregate
         
         next if newsfeeds.count < 1
         
-        newsfeed_aggregate_per_component_class = Object.const_get("NewsfeedAggregatePer".concat(item.capitalize))   # NewsfeedAggregatePerCategory or NewsfeedAggregatePerPublisher
+        newsfeed_aggregate_per_component_class = Object.const_get("NewsfeedAggregatePer".concat(item.capitalize))
         newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.where(:newsfeed_ids_string => sorted_newsfeed_id_string).and(component_id => component._id).first
 
         unless newsfeed_aggregate_per_component.present?

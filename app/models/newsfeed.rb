@@ -63,8 +63,7 @@ class Newsfeed
           self.content_urls[pub_date] = []
         end
         
-        # merge (push) all URL items to fc_list_hash
-        # it's possible that there is more than 1 item published on the same pub_date, so save each into an array
+        # it's possible that there is more than 1 item published on the same pub_date, so push each into the pub_date-indexed array
         self.content_urls[pub_date].push content_url_hash 
         
         break if (c += 1 ) >= max_content_urls_per_feed_url

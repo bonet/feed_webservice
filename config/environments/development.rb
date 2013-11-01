@@ -36,4 +36,6 @@ FeedWebservice::Application.configure do
   config.assets.debug = true
   
   config.max_content_urls_per_publisher_or_category = 20
+  
+  config.default_newsfeed_aggregate_id = 1
 end

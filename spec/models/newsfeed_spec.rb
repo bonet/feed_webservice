@@ -1,25 +1,28 @@
 require 'spec_helper'
 
 describe Newsfeed do
-  it { should belong_to(:category) } 
-  it { should belong_to(:publisher) } 
   
-  it { should have_fields(:_id, :category_id, :publisher_id, :feed_urls, :content_urls, :updated) }
-  
-  [:publisher_id, :category_id, :feed_urls, :content_urls].each do |attribute|
-    it { should allow_mass_assignment_of(attribute) }
+  context "Class Attributes" do
+    it { should belong_to(:category) } 
+    it { should belong_to(:publisher) } 
+    
+    it { should have_fields(:_id, :category_id, :publisher_id, :feed_urls, :content_urls, :updated) }
+    
+    [:publisher_id, :category_id, :feed_urls, :content_urls].each do |attribute|
+      it { should allow_mass_assignment_of(attribute) }
+    end
+    
+    it { should have_index_for(:publisher_id => 1) }
+    it { should have_index_for(:category_id => 1) }
+    
+    it { should validate_presence_of(:publisher_id) }
+    it { should validate_numericality_of(:publisher_id).to_allow(:only_integer => true, :greater_than => 0) }
+    
+    it { should validate_presence_of(:category_id) }
+    it { should validate_numericality_of(:category_id).to_allow(:only_integer => true, :greater_than => 0) }
   end
   
-  it { should have_index_for(:publisher_id => 1) }
-  it { should have_index_for(:category_id => 1) }
-  
-  it { should validate_presence_of(:publisher_id) }
-  it { should validate_numericality_of(:publisher_id).to_allow(:only_integer => true, :greater_than => 0) }
-  
-  it { should validate_presence_of(:category_id) }
-  it { should validate_numericality_of(:category_id).to_allow(:only_integer => true, :greater_than => 0) }
-  
-  context "object creation" do
+  context "Object Creation" do
     
     let(:nyt_tech_feed) { FactoryGirl.create(:nyt_tech_newsfeed) }
     

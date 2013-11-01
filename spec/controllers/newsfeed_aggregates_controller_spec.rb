@@ -45,7 +45,7 @@ describe NewsfeedAggregatesController do
     end
   end
   
-  describe "GET 'show_default'", :focus => true do
+  describe "GET 'show_default'" do
     
     before do
       get :show_default

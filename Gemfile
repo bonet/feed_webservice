@@ -49,7 +49,7 @@ group :development, :test do
   
   gem 'factory_girl_rails'
 
-  gem 'simplecov', :require => false
+  gem 'simplecov'
 end
 
 group :test do

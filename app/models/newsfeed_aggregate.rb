@@ -39,10 +39,11 @@ class NewsfeedAggregate
   # this method grabs Newsfeeds and then aggregate them by Publisher and by Category
   def populate_newsfeed_aggregate_per_publishers_and_newsfeed_aggregate_per_categories
     
+    self.newsfeed_ids_string = self.newsfeed_ids_string.split(",").uniq.sort!.join(",")
+    
     ["publisher", "category"].each do |item|
       
-      newsfeed_id_array = self.newsfeed_ids_string.split(",").sort!
-      sorted_newsfeed_id_string = newsfeed_id_array.join(",")
+      newsfeed_id_array = self.newsfeed_ids_string.split(",")
       
       
       # Check whether there is a Newsfeed document related to each of the Category / Publisher document.
@@ -58,10 +59,10 @@ class NewsfeedAggregate
         next if newsfeeds.count < 1
         
         newsfeed_aggregate_per_component_class = Object.const_get("NewsfeedAggregatePer".concat(item.capitalize))
-        newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.where(:newsfeed_ids_string => sorted_newsfeed_id_string).and(component_id => component._id).first
+        newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.where(:newsfeed_ids_string => self.newsfeed_ids_string).and(component_id => component._id).first
 
         unless newsfeed_aggregate_per_component.present?
-          newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.create( :newsfeed_ids_string => sorted_newsfeed_id_string,
+          newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.create( :newsfeed_ids_string => self.newsfeed_ids_string,
                                                                                                                   component_id => component._id,
                                                                                                                   component_name => component.name
                                                                                           )

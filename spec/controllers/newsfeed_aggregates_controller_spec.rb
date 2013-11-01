@@ -8,14 +8,18 @@ describe NewsfeedAggregatesController do
   let(:wash_arts_feed) { FactoryGirl.create(:wash_arts_newsfeed) }
   
   before(:each) do
-    post :create, { :newsfeed_ids => "#{nyt_tech_feed._id},#{nyt_arts_feed._id},#{wash_arts_feed._id}" }
+    nyt_tech_feed
+    nyt_arts_feed
+    wash_business_feed
+    wash_arts_feed
+    post :create, { :newsfeed_ids => "#{wash_arts_feed._id},#{nyt_tech_feed._id},#{nyt_arts_feed._id}" }
   end
   
   describe "POST 'create'" do
     
     it "should create NewsfeedAggregate" do
       NewsfeedAggregate.first.should_not be_nil
-      NewsfeedAggregate.first.newsfeed_ids_string.split(",").should =~ ["#{nyt_tech_feed._id}","#{nyt_arts_feed._id}","#{wash_arts_feed._id}"]
+      NewsfeedAggregate.first.newsfeed_ids_string.should eql "#{nyt_tech_feed._id},#{nyt_arts_feed._id},#{wash_arts_feed._id}" # order has to be identical (ascending)
       NewsfeedAggregate.first.newsfeed_aggregate_per_publisher_ids.should =~ [nyt_tech_feed.publisher_id, wash_arts_feed.publisher_id]
       NewsfeedAggregate.first.newsfeed_aggregate_per_category_ids.should =~ [nyt_arts_feed.category_id, nyt_tech_feed.category_id]
       NewsfeedAggregate.first.newsfeed_aggregate_per_publishers.count.should eql 2
@@ -37,7 +41,7 @@ describe NewsfeedAggregatesController do
       
       json.should_not be_nil
       json["_id"].should eql newsfeed_aggregate_id
-      json["newsfeed_ids_string"].split(",").should =~ ["#{nyt_tech_feed._id}","#{nyt_arts_feed._id}","#{wash_arts_feed._id}"]
+      json["newsfeed_ids_string"].should eql "#{nyt_tech_feed._id},#{nyt_arts_feed._id},#{wash_arts_feed._id}" # order has to be identical (ascending)
       json["newsfeed_aggregate_per_publisher_ids"].should =~ [nyt_tech_feed.publisher_id, wash_arts_feed.publisher_id]
       json["newsfeed_aggregate_per_category_ids"].should =~ [nyt_arts_feed.category_id, nyt_tech_feed.category_id]
       json["newsfeed_aggregate_per_publishers"].count.should eql 2
@@ -57,7 +61,7 @@ describe NewsfeedAggregatesController do
       
       json.should_not be_nil
       json["_id"].should eql Rails.configuration.default_newsfeed_aggregate_id
-      json["newsfeed_ids_string"].split(",").should =~ ["#{nyt_tech_feed._id}","#{nyt_arts_feed._id}","#{wash_arts_feed._id}"]
+      json["newsfeed_ids_string"].should eql "#{nyt_tech_feed._id},#{nyt_arts_feed._id},#{wash_arts_feed._id}"  # order has to be identical (ascending)
       json["newsfeed_aggregate_per_publisher_ids"].should =~ [nyt_tech_feed.publisher_id, wash_arts_feed.publisher_id]
       json["newsfeed_aggregate_per_category_ids"].should =~ [nyt_arts_feed.category_id, nyt_tech_feed.category_id]
       json["newsfeed_aggregate_per_publishers"].count.should eql 2

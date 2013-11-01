@@ -13,27 +13,13 @@ class NewsfeedAggregatesController < ApplicationController
   
   
   def create
-    sorted_newsfeed_id_string = self.sort_numeric_csv_string(params[:newsfeed_ids]) 
-
-    newsfeed_aggregate = NewsfeedAggregate.where(:newsfeed_ids_string => sorted_newsfeed_id_string).first
+    newsfeed_aggregate = NewsfeedAggregate.where(:newsfeed_ids_string => params[:newsfeed_ids].split(",").uniq.sort!.join(",")).first
       
     unless newsfeed_aggregate.present?
-      newsfeed_aggregate = NewsfeedAggregate.create(:newsfeed_ids_string => sorted_newsfeed_id_string)
+      newsfeed_aggregate = NewsfeedAggregate.create(:newsfeed_ids_string => params[:newsfeed_ids])
     end
 
     render :text => newsfeed_aggregate.to_json
   end
-  
-  #Sort ascending the numbers in newsfeed_ids string
-  def sort_numeric_csv_string(str) 
-    
-    sorted_newsfeed_id_array = []
-    
-    newsfeed_id_array = str.split(",").each do |v|
-      sorted_newsfeed_id_array << v.to_i
-    end
-    
-    sorted_newsfeed_id_string = sorted_newsfeed_id_array.sort!.join(",")  
-    
-  end
+
 end

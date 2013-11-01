@@ -44,6 +44,12 @@ describe CategoriesPerPublishersController do
       json_publisher_ids_array.uniq.count.should eql publisher_ids_array.count
       json_category_ids_array.uniq.count.should eql category_ids_array.count
     end
+    
+    it "should return blank if CategoriesPerPublisher is empty" do
+      CategoriesPerPublisher.destroy_all
+      get :show
+      response.body.should be_blank
+    end
   end
   
   describe "GET 'show_personalized'" do
@@ -89,6 +95,11 @@ describe CategoriesPerPublishersController do
       json_publisher_ids_array.uniq.count.should eql publisher_ids_array.count
       json_category_ids_array.uniq.count.should eql category_ids_array.count
 
+    end
+    
+    it "should return blank if NewsfeedAggregate with the requested ID cannot be found" do
+      get :show_personalized, :newsfeed_aggregate_id => 55555
+      response.body.should be_blank
     end
   end
 end

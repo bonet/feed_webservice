@@ -9,10 +9,11 @@ class CategoriesPerPublishersController < ApplicationController
   end
   
   def show_personalized
-    if params[:newsfeed_aggregate_id].nil?
+    newsfeed_aggregate = NewsfeedAggregate.find(params[:newsfeed_aggregate_id])
+    
+    if newsfeed_aggregate.nil?
       render :nothing => true
     else
-      newsfeed_aggregate = NewsfeedAggregate.find(params[:newsfeed_aggregate_id])
       newsfeed_ids_array = newsfeed_aggregate['newsfeed_ids_string'].split(",")
       
       result = {}

@@ -11,9 +11,6 @@ FeedWebservice::Application.routes.draw do
   
   resources :admin, only: [:index]
 
-  resources :publishers, only:[:show]
-  resources :categories, only:[:show]
-  resources :newsfeeds, only:[:show]
   resources :newsfeed_aggregates, only:[:create, :show]
   resource :categories_per_publisher, only:[:show]
   

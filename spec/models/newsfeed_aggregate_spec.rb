@@ -9,7 +9,7 @@ describe NewsfeedAggregate do
     
     it { should validate_presence_of(:newsfeed_ids_string) }
     
-    it { should have_fields(:_id, :newsfeed_ids_string) }
+    it { should have_fields(:_id, :newsfeed_ids_string, :updated) }
     
     it { should respond_to(:populate_id) } 
   

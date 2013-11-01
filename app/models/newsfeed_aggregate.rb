@@ -5,6 +5,7 @@ class NewsfeedAggregate
   
   field :_id, type: Integer
   field :newsfeed_ids_string
+  field :updated, type: DateTime
   field :newsfeed_aggregate_per_publishers, type: Array
   field :newsfeed_aggregate_per_categories, type: Array
   
@@ -72,6 +73,7 @@ class NewsfeedAggregate
         self[newsfeed_aggregate_per_component_id_sym] << newsfeed_aggregate_per_component._id
       end
     end
+    self.updated = DateTime.now
   end
   
 end

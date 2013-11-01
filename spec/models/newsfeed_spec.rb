@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Newsfeed do
   
+  let(:nyt_tech_feed) { FactoryGirl.create(:nyt_tech_newsfeed) }
+  let(:nyt_arts_feed) { FactoryGirl.create(:nyt_arts_newsfeed) }
+  let(:wash_business_feed) { FactoryGirl.create(:wash_business_newsfeed) }
+  let(:wash_arts_feed) { FactoryGirl.create(:wash_arts_newsfeed) }
+  
   context "Class Attributes" do
     it { should belong_to(:category) } 
     it { should belong_to(:publisher) } 
@@ -24,8 +29,6 @@ describe Newsfeed do
   
   context "Object Creation" do
     
-    let(:nyt_tech_feed) { FactoryGirl.create(:nyt_tech_newsfeed) }
-    
     it "should have proper attributes" do
       nyt_tech_feed.should_not be_nil
       nyt_tech_feed.content_urls.count.should be > 0
@@ -39,6 +42,28 @@ describe Newsfeed do
       lambda {
         FactoryGirl.create(:nyt_arts_newsfeed) 
       }.should change{ Newsfeed.max(:_id) }.by(1)
+    end
+  end
+  
+  context "cron_update_newsfeed_aggregates Test" do
+    
+    before(:each) do
+      nyt_tech_feed
+      nyt_arts_feed
+    end
+    
+    it "should update Newsfeed" do
+      sleep(2)
+      NewsfeedAggregate.cron_update_newsfeed_aggregates
+      Newsfeed.find(nyt_tech_feed._id).updated.should_not eq nyt_tech_feed.updated
+    end
+    
+    it "should update NewsfeedAggregate" do
+      newsfeed_aggregate_1 = NewsfeedAggregate.create(:newsfeed_ids_string => "#{nyt_tech_feed._id},#{nyt_arts_feed._id}")
+      sleep(2)
+      NewsfeedAggregate.cron_update_newsfeed_aggregates
+      newsfeed_aggregate_2 = NewsfeedAggregate.first
+      newsfeed_aggregate_1.updated.should_not eq newsfeed_aggregate_2.updated
     end
   end
 end

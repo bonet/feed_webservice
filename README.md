@@ -29,12 +29,12 @@ Development Environment Setup
 Data Setup
 ==========
 
-1. Create new Categories in http://[yourdomain.com]/admin/categories/new
+1. Create new Categories in `http://[yourdomain.com]/admin/categories/new`
 
-2. Create new Publishers in http://[yourdomain.com]/admin/publishers/new
+2. Create new Publishers in `http://[yourdomain.com]/admin/publishers/new`
 
 3. After creating at least 1 Category and 1 Publisher, create a Newsfeed item (which is a combination of a Category and a Publisher)
-   in http://[yourdomain.com]/admin/newsfeeds/new by adding a comma separated value of related feed URLs
+   in `http://[yourdomain.com]/admin/newsfeeds/new` by adding a comma separated value of related feed URLs
 
 4. Run / wait for the cron task to update the feed URL contents and related database info
 
@@ -46,17 +46,21 @@ Feed Webservice provides several APIs to retrieve Newsfeed data in various forma
 
 * To retrieve a list of available Categories and Publishers, e.g. for building website menu
 
-  1. Default Data
-    - `curl http://[yourdomain.com]/categories_per_publisher`
+  - Default Data
   
-  2. Personalized Data
-    - `curl http://[yourdomain.com]/personalized_categories_per_publisher/[:id]`
+    `curl http://[yourdomain.com]/categories_per_publisher`
+  
+  - Personalized Data
+  
+    `curl http://[yourdomain.com]/personalized_categories_per_publisher/[:id]`
     
     
 * To retrieve a list of Newsfeed content URLs
 
-  1. Default Data
-    - `curl http://[yourdomain.com]/default_newsfeed_aggregate`
+  - Default Data
+  
+    `curl http://[yourdomain.com]/default_newsfeed_aggregate`
     
-  2. Personalized Data
-    - `curl http://[yourdomain.com]/newsfeed_aggregates/[:id]`
+  - Personalized Data
+  
+    `curl http://[yourdomain.com]/newsfeed_aggregates/[:id]`

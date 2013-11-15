@@ -8,5 +8,18 @@
   <div class="action">
   	<%= f.submit "Create"%>
   </div>
+  
+  <div>
+    <% if Publisher.count > 0 %>
+    <br />
+      <p>Current Publishers:</p>
+      <ul>
+        <% Publisher.all.each do |publisher| %>
+          <li> <%= publisher.name %></li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+  
   <p>Back to <%= link_to "Admin Page", admin_index_path %></p>
 <% end %>

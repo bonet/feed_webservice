@@ -13,11 +13,40 @@
   
   <div class="field">
     <%= newsfeed.label :feed_urls %>
-    <%= newsfeed.text_field :feed_urls %>
+    <%= newsfeed.text_field :feed_urls %> (in CSV format)
   </div>
   
   <div class="action">
     <%= newsfeed.submit "Create"%>
+  </div>
+  
+  <div>
+    <% if Newsfeed.count > 0 %>
+    <br />
+      <p>Current Newsfeeds:</p>
+      <table>
+        <tr>
+          <th>Publisher</th>
+          <th>Category</th>
+          <th>Feed URLs</th>
+        </tr>
+        <% Newsfeed.all.each do |newsfeed| %>
+          <tr>
+            <td> <%= Publisher.find(newsfeed.publisher_id).name %></td>
+            <td> <%= Category.find(newsfeed.category_id).name %></td>
+            <td> 
+              <% if newsfeed.feed_urls.count > 0 %>
+                <ul>
+                  <% newsfeed.feed_urls.each do |url| %>
+                    <li><%= url %></li>
+                  <% end %>
+                </ul>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    <% end %>
   </div>
   <p>Back to <%= link_to "Admin Page", admin_index_path %></p>
 

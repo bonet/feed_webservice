@@ -15,10 +15,10 @@ describe CategoriesPerPublishersController do
     CategoriesPerPublisher.cron_update_categories_per_publisher
   end
   
-  describe "GET 'show'" do
+  describe "GET 'show_default'" do
     
     before do 
-      get :show
+      get :show_default
     end
     
     it { response.should be_success }
@@ -47,12 +47,12 @@ describe CategoriesPerPublishersController do
     
     it "should return blank if CategoriesPerPublisher is empty" do
       CategoriesPerPublisher.destroy_all
-      get :show
+      get :show_default
       response.body.should be_blank
     end
   end
   
-  describe "GET 'show_personalized'" do
+  describe "GET 'show'" do
     
     # CategoriesPerPublisher is personalized to only show the following newsfeeds: wash_business_feed._id, wash_arts_feed._id, and nyt_arts_feed._id
     
@@ -60,7 +60,7 @@ describe CategoriesPerPublishersController do
     
     before do
       newsfeed_aggregate
-      get :show_personalized, :newsfeed_aggregate_id => newsfeed_aggregate._id
+      get :show, :newsfeed_aggregate_id => newsfeed_aggregate._id
     end
     
     it { response.should be_success }
@@ -98,7 +98,7 @@ describe CategoriesPerPublishersController do
     end
     
     it "should return blank if NewsfeedAggregate with the requested ID cannot be found" do
-      get :show_personalized, :newsfeed_aggregate_id => 55555
+      get :show, :newsfeed_aggregate_id => 55555
       response.body.should be_blank
     end
   end

@@ -40,19 +40,20 @@ The newsfeed content is grouped either by Category and Publisher.
 
 Feed Webservice provides several APIs to retrieve Newsfeed data in various format.
 
-* Before calling the `personalized_categories_per_publisher` API, we need to create a new NewsfeedAggregate by supplying the desired Newsfeed IDs in CSV format:
+* Before calling the `categories_per_publishers` API, we need to create a new NewsfeedAggregate by supplying the desired Newsfeed IDs in CSV format, e.g.:
 
   `curl --data "newsfeed_ids=1,2,4" http://localhost:3000/newsfeed_aggregates`
+  
 
 * To retrieve a list of available Categories and Publishers, e.g. for building website menu, we can use the following APIs:
 
-  - Default Data (API name: `categories_per_publisher`)
+  - Default Data (API name: `default_categories_per_publisher`)
   
-    `curl http://[yourdomain.com]/categories_per_publisher`
+    `curl http://[yourdomain.com]/default_categories_per_publisher`
   
-  - Personalized Data (API name: `personalized_categories_per_publisher`)
+  - Personalized Data (API name: `categories_per_publishers`)
   
-    `curl http://[yourdomain.com]/personalized_categories_per_publisher/[:newsfeed_aggregate_id]`
+    `curl http://[yourdomain.com]/categories_per_publishers/[:newsfeed_aggregate_id]`
     
     
 * To retrieve a list of Newsfeed content URLs, we can use the following APIs:

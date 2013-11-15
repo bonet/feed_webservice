@@ -1,6 +1,6 @@
 class CategoriesPerPublishersController < ApplicationController
   
-  # Action        : show
+  # Action        : show_default
   # Output sample :
   #
   # {
@@ -24,7 +24,7 @@ class CategoriesPerPublishersController < ApplicationController
   #   }
   # }
   
-  def show
+  def show_default
     if CategoriesPerPublisher.count > 0
       render :text => CategoriesPerPublisher.first.namelist.to_json
     else 
@@ -34,7 +34,7 @@ class CategoriesPerPublishersController < ApplicationController
   
   
   
-  # Action        : show_personalized 
+  # Action        : show
   # Output sample :
   # 
   # {"1":
@@ -59,7 +59,7 @@ class CategoriesPerPublishersController < ApplicationController
   #       }
   # }
 
-  def show_personalized
+  def show
     newsfeed_aggregate = NewsfeedAggregate.find(params[:newsfeed_aggregate_id])
     
     if newsfeed_aggregate.nil?

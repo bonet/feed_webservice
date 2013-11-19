@@ -12,8 +12,7 @@ gem 'nokogiri'
 gem 'jquery-rails'
 gem 'aws-sdk'
 
-gem 'pg'
-
+gem 'thin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -22,7 +21,7 @@ group :assets do
 end
 
 group :development do
-  gem 'thin'
+
   
   gem 'better_errors'
   gem 'binding_of_caller'

@@ -1,14 +1,8 @@
-<pre>
-  ______            _  __          __  _                         _          
- |  ____|          | | \ \        / / | |                       (_)         
- | |__ ___  ___  __| |  \ \  /\  / /__| |__  ___  ___ _ ____   ___  ___ ___ 
- |  __/ _ \/ _ \/ _` |   \ \/  \/ / _ \ '_ \/ __|/ _ \ '__\ \ / / |/ __/ _ \
- | | |  __/  __/ (_| |    \  /\  /  __/ |_) \__ \  __/ |   \ V /| | (_|  __/
- |_|  \___|\___|\__,_|     \/  \/ \___|_.__/|___/\___|_|    \_/ |_|\___\___|
-                                                                            
-</pre>
+#Feed Webservice
 
-https://www.codeship.io/projects/bf2febe0-3493-0131-92d2-228038a705a1/status
+![Codeship Status](https://www.codeship.io/projects/bf2febe0-3493-0131-92d2-228038a705a1/status)
+
+[![Coverage Status](https://coveralls.io/repos/bonet/feed_webservice/badge.png?branch=master)](https://coveralls.io/r/bonet/feed_webservice?branch=master)
 
 ## Overview
 
@@ -41,9 +35,9 @@ The newsfeed content is grouped either by Category and Publisher.
 
 Feed Webservice provides several APIs to retrieve Newsfeed data in various format.
 
-* Before calling the `categories_per_publishers` API, we need to create a new NewsfeedAggregate by supplying the desired Newsfeed IDs in CSV format, e.g.:
+* Important: Before calling the `categories_per_publishers` or `newsfeed_aggregates` API, first we need to create a new NewsfeedAggregate by supplying the desired Newsfeed IDs in CSV format, e.g.:
 
-  `curl --data "newsfeed_ids=1,2,4" http://localhost:3000/newsfeed_aggregates`
+  `curl --data "newsfeed_ids=1,2,4" http://[yourdomain.com]/newsfeed_aggregates`
   
 
 * To retrieve a list of available Categories and Publishers, e.g. for building website menu, we can use the following APIs:

@@ -63,14 +63,17 @@ class NewsfeedAggregate
         newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.where(:newsfeed_ids_string => self.newsfeed_ids_string).and(component_id => component._id).first
 
         unless newsfeed_aggregate_per_component.present?
-          newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.create( :newsfeed_ids_string => self.newsfeed_ids_string,
+          newsfeed_aggregate_per_component = newsfeed_aggregate_per_component_class.new( :newsfeed_ids_string => self.newsfeed_ids_string,
                                                                                                                   component_id => component._id,
                                                                                                                   component_name => component.name
                                                                                           )
         end
         
+        newsfeed_aggregate_per_component.save # need to re-save to update content URLs, even though `newsfeed_aggregate_per_component` already exists
+        
         newsfeed_aggregate_per_component_id_sym = ("newsfeed_aggregate_per_" + item + "_ids").to_sym
         self[newsfeed_aggregate_per_component_id_sym] << newsfeed_aggregate_per_component._id
+        
       end
     end
     self.updated = DateTime.now
